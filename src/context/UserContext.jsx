@@ -7,15 +7,27 @@ const UserProvider = ({children}) => {
   const [user,setUser]=useState([ {logged: null} ])
   const [userLog,setUserlog]=useState("")
 
-  const loginUser = async (datos)  => {
+  const registerUser = async (datos)  => {
     console.log(user);
+    const response= await axios.post("http://localhost:5000/api/auth/register", {email: datos.email, password: datos.password})
+    localStorage.setItem("token", response.data.token)
+    if (response.data && response.data.email!=datos.email){
+      setUser( {email: datos.email, token: response.data.token})
+      alert("Registro correcto")
+    } else {
+      alert("Usuario ya existe")
+    }
+
+
+  }
+
+  const loginUser = async (datos)  => {
     const response= await axios.post("http://localhost:5000/api/auth/login", {email: datos.email, password: datos.password})
     localStorage.setItem("token", response.data.token)
     if (response.data){
       setUser( {email: datos.email, logged: true, token: response.data.token})
     }
     alert("Autentificacion correcta")
-
   }
 
   function profileUserfunc(){
@@ -42,7 +54,7 @@ const UserProvider = ({children}) => {
 
   }
 
-    return <UserContext.Provider value={{user,setUser,loginUser, logoutUser,profileUserfunc,userLog,setUserlog}}>
+    return <UserContext.Provider value={{user,setUser,loginUser, logoutUser,profileUserfunc,userLog,setUserlog,registerUser}}>
       {children}
       </UserContext.Provider>
   

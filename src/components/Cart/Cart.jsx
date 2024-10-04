@@ -10,15 +10,14 @@ const Cart = () => {
   const {cart,totalCLP}=useContext(CartContext)
   const {user}=useContext(UserContext)
   const cartTrue= cart.filter(item=>(item.add===true))
-  console.log(cartTrue);
+  console.log(user);
   
   const handleSubmit= async(e) =>{
     e.preventDefault()
     try {
-      const response= await axios.post("http://localhost:5000/api/checkouts", {cartTrue})
-      
-      alert("Carrito enviado con exito")
-      
+        const response= await axios.post("http://localhost:5000/api/checkouts", {cartTrue})
+
+        alert("Carrito enviado con exito")
     } catch (error) {
     }
 
@@ -62,7 +61,7 @@ const Cart = () => {
 
             <div className="">
               <div className="">
-                <button disabled={user? "":"false"} onSubmit={handleSubmit} type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-warning btn-block btn-lg">Proceder al pago</button>
+                <button disabled={user.logged? "":"false"} onClick={handleSubmit} type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-warning btn-block btn-lg">Proceder al pago</button>
               </div>
             </div>
 

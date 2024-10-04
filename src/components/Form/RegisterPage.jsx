@@ -7,25 +7,24 @@ const RegisterPage = () => {
   const email=useInput("")
   const password=useInput("")
   const passConfirm=useInput("")
+  const {registerUser}=useContext(UserContext)
   // const [email, setEmail] = useState("")
   // const [password, setPasword] = useState("")
   // const [passConfirm, setPassConfirm] = useState("")
-  const {user,setUser}=useContext(UserContext)
 
   const handleSubmit = (e)=> {
+    console.log(email,password,passConfirm);
+    
     e.preventDefault()
-    if (password===passConfirm && password.length>=6){
-      
-      alert("Enviado con exito")
-      // setUser([...user,{email:email, password:password, login:false}])  
-      
-    } else if (password.length<6) {
+    if (password.value===passConfirm.value && password.value.length>=6){
+      registerUser({'email': email.value, password: password.value})
+
+    } else if (password.value.length<6) {
       alert("Contrasena tiene que tener 6 caracteres minimo")
     } else{
       alert("Contrasenas no son iguales")
     }
   }
-
   
 
 

@@ -10,11 +10,6 @@ export default function Navbar() {
   const {totalCLP}=useContext(CartContext)
   const {user,setUser, logoutUser}=useContext(UserContext)
 
-function logout(){
-  logoutUser()
-}
-  
-
   return (
     <div>
       <nav className="navbar navbar-expand-lg pink-bg fixed-top">
@@ -47,7 +42,7 @@ function logout(){
               </li>
               {user.logged===true?(
                   <li className="nav-item">
-                <NavLink onClick={logout} to='' className="btn btn-outline-light"><FontAwesomeIcon icon={faLock} /> Logout</NavLink>
+                <NavLink onClick={logoutUser} to='' className="btn btn-outline-light"><FontAwesomeIcon icon={faLock} /> Logout</NavLink>
                 </li>):null}
             </ul>
         </div>

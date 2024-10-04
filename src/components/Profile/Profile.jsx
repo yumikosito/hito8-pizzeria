@@ -11,11 +11,6 @@ const Profile = () => {
 
   profileUserfunc()
   
-  function logout(){
-    logoutUser()
-  }
-  
-
   return (
     <div className='vw-100 d-flex align-items-center p-3 flex-column'>
       <Header/>
@@ -23,7 +18,7 @@ const Profile = () => {
         <h2 className='px-5'>Bienvenid@</h2><br/>
         <h4 className='p-1'>{userLog.email}</h4><br/>
 
-        <Link to='/' onClick={logout} className="btn btn-outline-danger mx-5"><FontAwesomeIcon icon={faPizzaSlice} /> Cerrar sesion</Link>
+        <Link to='/' onClick={logoutUser} className="btn btn-outline-danger mx-5"><FontAwesomeIcon icon={faPizzaSlice} /> Cerrar sesion</Link>
         
       </div>
 
